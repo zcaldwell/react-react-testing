@@ -1,3 +1,5 @@
+import { render, screen } from '@testing-library/react'
+import Home from './Home'
 
 const user = {
   id: 1,
@@ -11,5 +13,11 @@ const user = {
 }
 
 test('Should render the user profile', () => {
+  render(<Home user={user} />)
 
+  const heading = screen.getByRole('heading', {
+    name: /Vonta/i,
+  })
+
+  expect(heading).toBeInTheDocument()
 })
