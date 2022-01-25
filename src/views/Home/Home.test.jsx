@@ -12,12 +12,22 @@ const user = {
   color: 'crimson',
 }
 
-test('Should render the user profile', () => {
+test('Should render the user profile', async () => {
   render(<Home user={user} />)
 
-  const heading = screen.getByRole('heading', {
-    name: /Vonta/i,
-  })
+  const profileHeader = await screen.findByAltText('header')
+  const image = screen.getByAltText('avatar')
+  const profileName = screen.getByRole('heading', { name: 'Vonta' })
+  const faveColor = screen.getByText(/crimson/i)
+  const likes = screen.getByRole('list')
+  const interestHead = screen.getByRole('heading', { name: /interests/i })
+  const motto = screen.getByText(/res non verba/i)
 
-  expect(heading).toBeInTheDocument()
+  expect(profileHeader).toBeInTheDocument()
+  expect(image).toBeInTheDocument()
+  expect(profileName).toBeInTheDocument()
+  expect(faveColor).toBeInTheDocument()
+  expect(likes.children.length).toEqual(6)
+  expect(interestHead).toBeInTheDocument()
+  expect(motto).toBeInTheDocument()
 })

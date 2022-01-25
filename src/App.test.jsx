@@ -1,4 +1,4 @@
-import { render, screen, waitForElementToBeRemoved } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import App from './App'
 
 test('Should render the header', async () => {
@@ -6,8 +6,14 @@ test('Should render the header', async () => {
 
   const headImage = screen.getByAltText(/alchemy/i)
 
-  const meet = await screen.findByText(/Vonta/i)
+  const name = await screen.findByText(/vonta/i)
 
-  expect(meet).toBeInTheDocument()
+  const banner = screen.getByRole('banner')
+
+  expect(banner).toHaveStyle({
+    background: 'var(--grey)',
+  })
+
+  expect(name).toBeInTheDocument()
   expect(headImage).toBeInTheDocument()
 })
